@@ -1,64 +1,51 @@
 # CineTrack
 
-CineTrack is a movie discovery app built with React. It uses The Movie Database (TMDB) API to display popular movies, search the catalog and let users save titles to a personal watchlist.
+**Discover movies. Explore new stories. Build your watchlist.**
+
+CineTrack is a movie discovery application built with React and powered by the [TMDB API](https://www.themoviedb.org/). It allows users to explore popular and highly rated movies, search for titles, and manage a personal watchlist through a responsive and intuitive interface.
+
+## Preview
+
+### Home
+
+![CineTrack Home](screenshots/Home.png)
+
+### Movie Search
+
+![CineTrack Search](screenshots/Search.png)
+
+### My List
+
+![CineTrack Watchlist](screenshots/Watchlist.png)
 
 ## Features
 
-- Browse popular and highly rated movies.
-- Search movies by title using the TMDB API.
-- Save and remove movies from **My List**.
-- Keep the personal list between visits with `localStorage`.
-- Responsive layout for desktop and mobile screens.
+- **Movie Discovery:** Browse popular and highly rated movies.
+- **Movie Search:** Search the TMDB catalog by movie title.
+- **Personal Watchlist:** Add and remove movies from My List.
+- **Local Persistence:** Keep your watchlist saved between visits using `localStorage`.
+- **Responsive Design:** Enjoy the application on desktop and mobile devices.
 
-## Tech stack
+## Technologies
 
-- React
-- JavaScript (ES Modules)
-- Vite
-- Tailwind CSS
-- TMDB API
-- Browser `localStorage`
+- **React** – UI development
+- **JavaScript (ES Modules)** – Application logic
+- **Vite** – Development server and build tool
+- **Tailwind CSS** – Styling
+- **TMDB API** – Movie data and images
+- **localStorage** – Local data persistence
 
-## Getting started
+## Getting Started
 
-### 1. Clone the repository
+### Prerequisites
 
-```bash
-git clone https://github.com/joaoluis2211/CineTrack.git
-cd CineTrack
-```
+- Node.js
+- npm
+- A TMDB API Read Access Token
 
-### 2. Install dependencies
+### Installation
 
-```bash
-npm install
-```
+1. Clone the repository:
 
-### 3. Configure the TMDB API key
-
-Create a `.env` file in the project root and add your TMDB API Read Access Token:
-
-```env
-VITE_TMDB_API_KEY=your_tmdb_api_read_access_token
-```
-
-You can create an API credential in your [TMDB account settings](https://www.themoviedb.org/settings/api). Keep your real `.env` file out of version control. The `.env` file is already listed in `.gitignore`.
-
-### 4. Run the development server
-
-```bash
-npm run dev
-```
-
-## Available scripts
-
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the local development server |
-| `npm run build` | Create the production build |
-| `npm run preview` | Preview the production build |
-| `npm run lint` | Run ESLint |
-
-## API attribution
-
-Movie information and images are provided by [The Movie Database (TMDB)](https://www.themoviedb.org/). CineTrack uses the TMDB API but is not endorsed or certified by TMDB.
+   ```bash
+   git clone
