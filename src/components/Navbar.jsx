@@ -1,13 +1,30 @@
-export function Navbar(){
-    return(
-        <nav className="flex bg-black py-6 px-12 items-center justify-between">
-            <h1 className="text-white text-5xl">Cine<span className="text-red-700 text-5xl">Track</span></h1>
-            <div className="flex gap-8 items-center">
-                <a className="hover:text-red-700 text-lg text-white" href="#">Inicio</a>
-                <a className="hover:text-red-700 text-lg text-white" href="#">Filmes</a>
-                <a className="hover:text-red-700 text-lg text-white" href="#">Series</a>
-                <a className="hover:text-red-700 text-lg text-white" href="#">Novidades</a>
-            </div>
-        </nav>
-    )
+export function Navbar({ onNavigate, activeSection }) {
+  const links = [
+    { id: 'inicio', label: 'Início' },
+    { id: 'explorar', label: 'Explorar' },
+    { id: 'minha-lista', label: 'Minha lista' },
+  ];
+
+  return (
+    <header className="site-header">
+      <a className="brand" href="#inicio" onClick={() => onNavigate('inicio')} aria-label="CineTrack - início">
+        <span className="brand-mark">C</span>
+        <span>Cine<span className="brand-accent">Track</span></span>
+      </a>
+
+      <nav className="main-nav" aria-label="Navegação principal">
+        {links.map((link) => (
+          <button
+            className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
+            key={link.id}
+            onClick={() => onNavigate(link.id)}
+          >
+            {link.label}
+          </button>
+        ))}
+      </nav>
+
+      <a className="header-note" href="#explorar">Seu próximo filme começa aqui <span>↗</span></a>
+    </header>
+  );
 }

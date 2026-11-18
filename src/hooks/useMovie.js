@@ -1,30 +1,37 @@
-import {useState, useEffect} from 'react';
+import { useEffect, useState } from 'react';
 import { movieService } from '../services/tmdb';
 
-export function useMovie (){
-    const [populares, setPopulares] = useState([]);
-    const [carregando, setCarregando] = useState(true);
-    const [erro, setErro] = useState("");
+export function useMovie() {
+  const [populares, setPopulares] = useState([]);
+  const [bemAvaliados, setBemAvaliados] = useState([]);
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState('');
 
-    useEffect(() => {
-        const carregarTodosFilmes = async () => {
-            try{
-                setCarregando(true);
+  useEffect(() => {
+    let ativo = true;
 
-                const [popularesResponse] = await Promise.all([
-                    movieService.obterPopulares(),
-                ]);
-
-                setPopulares(popularesResponse);
-            } catch (error) {
-                setErro("Erro ao carregar filmes:");
-                console.error(error);
-            } finally {
-                setCarregando(false);
-            }
+    async function carregarFilmes() {
+      try {
+        setCarregando(true);
+        setErro('');
+        const [filmesPopulares, filmesBemAvaliados] = await Promise.all([
+          movieService.obterPopulares(),
+          movieService.obterMaisBemAvaliados(),
+        ]);
+        if (ativo) {
+          setPopulares(filmesPopulares);
+          setBemAvaliados(filmesBemAvaliados);
         }
-        carregarTodosFilmes();
-    }, []);
+      } catch (error) {
+        if (ativo) setErro(error.message || 'Não foi possível carregar os filmes.');
+      } finally {
+        if (ativo) setCarregando(false);
+      }
+    }
 
-    return { populares, carregando, erro };
+    carregarFilmes();
+    return () => { ativo = false; };
+  }, []);
+
+  return { populares, bemAvaliados, carregando, erro };
 }

@@ -1,16 +1,64 @@
-# React + Vite
+# CineTrack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CineTrack is a movie discovery app built with React. It uses The Movie Database (TMDB) API to display popular movies, search the catalog and let users save titles to a personal watchlist.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Browse popular and highly rated movies.
+- Search movies by title using the TMDB API.
+- Save and remove movies from **My List**.
+- Keep the personal list between visits with `localStorage`.
+- Responsive layout for desktop and mobile screens.
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- JavaScript (ES Modules)
+- Vite
+- Tailwind CSS
+- TMDB API
+- Browser `localStorage`
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/joaoluis2211/CineTrack.git
+cd CineTrack
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure the TMDB API key
+
+Create a `.env` file in the project root and add your TMDB API Read Access Token:
+
+```env
+VITE_TMDB_API_KEY=your_tmdb_api_read_access_token
+```
+
+You can create an API credential in your [TMDB account settings](https://www.themoviedb.org/settings/api). Keep your real `.env` file out of version control. The `.env` file is already listed in `.gitignore`.
+
+### 4. Run the development server
+
+```bash
+npm run dev
+```
+
+## Available scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the local development server |
+| `npm run build` | Create the production build |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run ESLint |
+
+## API attribution
+
+Movie information and images are provided by [The Movie Database (TMDB)](https://www.themoviedb.org/). CineTrack uses the TMDB API but is not endorsed or certified by TMDB.

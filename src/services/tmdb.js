@@ -1,40 +1,39 @@
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-const headersConfig = {
-    method: 'GET',
+async function request(endpoint) {
+  if (!API_KEY) {
+    throw new Error('TMDB API key not found. Add VITE_TMDB_API_KEY to your .env file.');
+  }
+
+  const response = await fetch(`${BASE_URL}${endpoint}`, {
     headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`
-    }
+      accept: 'application/json',
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`TMDB request failed (${response.status}).`);
+  }
+
+  return response.json();
 }
 
 export const movieService = {
+  async obterPopulares() {
+    const data = await request('/movie/popular?language=pt-BR&page=1');
+    return data.results ?? [];
+  },
 
-    obterPopulares: async () => {
-        try {
-            const response = await fetch(`${BASE_URL}/movie/popular?language=pt-BR&page=1`, headersConfig);
-            if (!response.ok) throw new Error('Erro ao obter filmes populares');
+  async obterMaisBemAvaliados() {
+    const data = await request('/movie/top_rated?language=pt-BR&page=1');
+    return data.results ?? [];
+  },
 
-            const data = await response.json();
-            return data.results;
-        } catch (error) {
-            console.error("Erro ao obter filmes populares:", error);
-            return [];
-        }
-    },
-
-    buscarFilmes: async (nome) => {
-        try {
-            const query = encodeURIComponent(nome);
-            const response = await fetch(`${BASE_URL}/search/movie?query=${query}&language=pt-BR&page=1`, headersConfig);
-            if (!response.ok) throw new Error('Erro ao buscar filmes');
-
-            const data = await response.json();
-            return data.results;
-        } catch (error) {
-            console.error("Erro ao buscar filmes:", error);
-            return [];
-        }
-    }
-}
+  async buscarFilmes(nome) {
+    const query = encodeURIComponent(nome);
+    const data = await request(`/search/movie?query=${query}&language=pt-BR&page=1`);
+    return data.results ?? [];
+  },
+};
