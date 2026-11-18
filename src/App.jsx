@@ -33,9 +33,6 @@ function App() {
   useEffect(() => {
     const termo = pesquisa.trim();
     if (!termo) {
-      setFilmesPesquisados([]);
-      setErroBusca('');
-      setBuscando(false);
       return undefined;
     }
 
@@ -59,6 +56,16 @@ function App() {
     };
   }, [pesquisa]);
 
+      function atualizarPesquisa(valor) {
+      setPesquisa(valor);
+
+      if (!valor.trim()) {
+        setFilmesPesquisados([]);
+        setErroBusca('');
+        setBuscando(false);
+      }
+    }
+    
   const destaque = populares[0];
   const outrosPopulares = populares.slice(1);
 
@@ -126,7 +133,7 @@ function App() {
             <input
               type="search"
               value={pesquisa}
-              onChange={(event) => setPesquisa(event.target.value)}
+              onChange={(event) => atualizarPesquisa(event.target.value)}
               placeholder="Buscar por título..."
               aria-label="Buscar filmes por título"
             />
